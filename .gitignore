@@ -341,5 +341,6 @@ hs_err_pid*
 
 .bloop
 .metals
+.scalafmt.conf
 .vscode
 project
