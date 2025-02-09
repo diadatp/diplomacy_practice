@@ -18,8 +18,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Cleanup
-        run: sed -i "s/%NAME%/test/g" build.mill
       - name: Cache Scala
         uses: coursier/cache-action@v6
       - name: Setup Scala
@@ -27,9 +25,6 @@ jobs:
         with:
           jvm: adopt:11
           apps: sbt
-      - name: Setup Mill
-        run: |
-          curl -L https://github.com/com-lihaoyi/mill/releases/download/0.12.5/0.12.5 > mill && chmod +x mill
       - name: Setup Dependencies
         run: |
           sudo apt-get install ccache
@@ -58,5 +53,3 @@ jobs:
           ln -sf $(pwd)/${{ env.verilator-install-dir }}/bin/verilator_bin $(pwd)/${{ env.verilator-install-dir }}/share/verilator/verilator_bin
       - name: SBT Test
         run: sbt test
-      - name: mill Test
-        run: ./mill _.test
